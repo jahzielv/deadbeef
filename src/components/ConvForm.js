@@ -10,7 +10,7 @@ class ConvForm extends Component {
         super(props);
         this.props = props;
         this.state = {
-            indata: "",
+            indata: "0",
             hexdata: "",
             bindata: ""
         };
@@ -18,21 +18,30 @@ class ConvForm extends Component {
 
     handleChange = e => {
         // console.log("yeet");
-        this.setState({
-            indata: e.target.value,
-            hexdata: dec2hex(e.target.value),
-            bindata: dec2bin(e.target.value)
-        });
+        if (e.target.value === "") {
+            this.setState({
+                indata: e.target.value,
+                hexdata: "", //dec2hex(e.target.value),
+                bindata: "" //dec2bin(e.target.value)
+            });
+        } else {
+            this.setState({
+                indata: e.target.value,
+                hexdata: dec2hex(e.target.value),
+                bindata: dec2bin(e.target.value)
+            });
+        }
     };
     render() {
         return (
             <React.Fragment>
                 <form className="form">
                     <input
-                        type="text"
+                        type="number"
                         className="input"
                         onChange={this.handleChange}
                         value={this.state.indata}
+                        autoFocus
                     />
                     <input
                         type="text"

@@ -8,14 +8,14 @@
 }
 
 .App-body {
-    background-color: #282c34;
+    background-color: white;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
-    color: white;
+    color: #268bd2;
 }
 
 .App-link {
@@ -31,12 +31,16 @@
 
 .input {
     font-size: larger;
+    background-color: white;
     border-radius: 15px;
     width: 300px;
     height: 50px;
     padding: 5%;
     margin: 2%;
+    border: none;
+    border-color: transparent;
 }
 .input:focus {
     outline: none;
+    background-color: whitesmoke;
 }

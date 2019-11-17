@@ -27,7 +27,7 @@ class ConvForm extends Component {
     render() {
         return (
             <React.Fragment>
-                <form>
+                <form className="form">
                     <input
                         type="text"
                         className="input"

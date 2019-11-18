@@ -10,9 +10,9 @@ class ConvForm extends Component {
         super(props);
         this.props = props;
         this.state = {
-            indata: "0",
-            hexdata: "",
-            bindata: ""
+            decdata: "decimal",
+            hexdata: "hexadecimal",
+            bindata: "binary"
         };
     }
 
@@ -20,16 +20,27 @@ class ConvForm extends Component {
         // console.log("yeet");
         if (e.target.value === "") {
             this.setState({
-                indata: e.target.value,
-                hexdata: "", //dec2hex(e.target.value),
-                bindata: "" //dec2bin(e.target.value)
+                decdata: "decimal",
+                hexdata: "hexadecimal", //dec2hex(e.target.value),
+                bindata: "binary" //dec2bin(e.target.value)
             });
         } else {
             this.setState({
-                indata: e.target.value,
+                decdata: e.target.value,
                 hexdata: dec2hex(e.target.value),
                 bindata: dec2bin(e.target.value)
             });
+        }
+    };
+
+    handleClick = e => {
+        if (this.state.decdata === "decimal") {
+            this.setState({ decdata: "" });
+        }
+    };
+    focusOut = e => {
+        if (this.state.decdata === "") {
+            this.setState({ decdata: "decimal" });
         }
     };
     render() {
@@ -37,10 +48,12 @@ class ConvForm extends Component {
             <React.Fragment>
                 <form className="form">
                     <input
-                        type="number"
+                        type="text"
                         className="input"
                         onChange={this.handleChange}
-                        value={this.state.indata}
+                        value={this.state.decdata}
+                        onClick={this.handleClick}
+                        onBlur={this.focusOut}
                         autoFocus
                     />
                     <input

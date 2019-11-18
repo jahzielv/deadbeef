@@ -9,7 +9,7 @@ class App extends Component {
             <div className="App">
                 <div className="App-body">
                     <header className="App-header">
-                        <h1>Bases</h1>
+                        <h1>deadbeef</h1>
                     </header>
                     <ConvForm />
                 </div>

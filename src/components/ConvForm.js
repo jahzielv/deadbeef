@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import anyBase from "any-base";
+import CopyButton from "./CopyButton";
 import "../App.css";
 
 const dec2hex = anyBase(anyBase.DEC, anyBase.HEX);
@@ -190,41 +191,59 @@ class ConvForm extends Component {
         return (
             <React.Fragment>
                 <form className="form">
-                    <input
-                        type="text"
-                        className="input"
-                        value={this.state.decdata}
-                        onChange={this.handleDecChange}
-                        onClick={this.handleDecClick}
-                        onBlur={this.focusOutDec}
-                        // autoFocus
-                    />
-                    <input
-                        type="text"
-                        className="input"
-                        // readOnly
-                        value={this.state.hexdata}
-                        onChange={this.handleHexChange}
-                        onClick={this.handleHexClick}
-                        onBlur={this.focusOutHex}
-                    />
-                    <input
-                        type="text"
-                        className="input"
-                        // readOnly
-                        value={this.state.bindata}
-                        onChange={this.handleBinChange}
-                        onClick={this.handleBinClick}
-                        onBlur={this.focusOutBin}
-                    />
-                    <input
-                        type="text"
-                        className="input"
-                        value={this.state.octdata}
-                        onChange={this.handleOctalChange}
-                        onClick={this.handleOctClick}
-                        onBlur={this.focusOutOct}
-                    />
+                    <div class="input-container">
+                        <input
+                            type="text"
+                            className="input"
+                            value={this.state.decdata}
+                            onChange={this.handleDecChange}
+                            onClick={this.handleDecClick}
+                            onBlur={this.focusOutDec}
+                            // autoFocus
+                        />
+                        <CopyButton copyValue={this.state.octdata} btnstyle="primary" />
+                    </div>
+                    <div class="input-container">
+                        <input
+                            type="text"
+                            className="input"
+                            // readOnly
+                            value={this.state.hexdata}
+                            onChange={this.handleHexChange}
+                            onClick={this.handleHexClick}
+                            onBlur={this.focusOutHex}
+                        />
+                        <CopyButton
+                            copyValue={this.state.octdata}
+                            btnstyle="secondary"
+                        />
+                    </div>
+                    <div class="input-container">
+                        <input
+                            type="text"
+                            className="input"
+                            // readOnly
+                            value={this.state.bindata}
+                            onChange={this.handleBinChange}
+                            onClick={this.handleBinClick}
+                            onBlur={this.focusOutBin}
+                        />
+                        <CopyButton
+                            copyValue={this.state.octdata}
+                            btnstyle="tertiary"
+                        />
+                    </div>
+                    <div className="input-container">
+                        <input
+                            type="text"
+                            className="input"
+                            value={this.state.octdata}
+                            onChange={this.handleOctalChange}
+                            onClick={this.handleOctClick}
+                            onBlur={this.focusOutOct}
+                        />
+                        <CopyButton copyValue={this.state.octdata} btnstyle="tetrary" />
+                    </div>
                 </form>
             </React.Fragment>
         );

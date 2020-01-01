@@ -201,7 +201,7 @@ class ConvForm extends Component {
                             onBlur={this.focusOutDec}
                             // autoFocus
                         />
-                        <CopyButton copyValue={this.state.octdata} btnstyle="primary" />
+                        <CopyButton copyValue={this.state.decdata} btnstyle="primary" />
                     </div>
                     <div class="input-container">
                         <input
@@ -214,7 +214,7 @@ class ConvForm extends Component {
                             onBlur={this.focusOutHex}
                         />
                         <CopyButton
-                            copyValue={this.state.octdata}
+                            copyValue={this.state.hexdata}
                             btnstyle="secondary"
                         />
                     </div>
@@ -229,7 +229,7 @@ class ConvForm extends Component {
                             onBlur={this.focusOutBin}
                         />
                         <CopyButton
-                            copyValue={this.state.octdata}
+                            copyValue={this.state.bindata}
                             btnstyle="tertiary"
                         />
                     </div>

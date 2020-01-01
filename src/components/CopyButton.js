@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import classNames from "classnames";
 import "../buttons/main.css";
 
+// Button for copying to clipboard
 class CopyButton extends Component {
     constructor(props) {
         super(props);

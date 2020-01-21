@@ -35,8 +35,9 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding-right: 2%;
+    /* padding-right: 2%; */
     width: 100%;
+    min-height: 105px;
 }
 
 .input {

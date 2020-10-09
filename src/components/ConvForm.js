@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import anyBase from "any-base";
-import CopyButton from "./CopyButton";
 import { Button, InputGroup } from "@blueprintjs/core";
 import "../App.css";
 import "normalize.css/normalize.css";

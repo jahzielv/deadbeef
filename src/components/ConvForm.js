@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import anyBase from "any-base";
 import CopyButton from "./CopyButton";
 import { Button, InputGroup } from "@blueprintjs/core";
-// import "../App.css";
+import "../App.css";
 import "normalize.css/normalize.css";
 import "@blueprintjs/core/lib/css/blueprint.css";
 
@@ -24,51 +24,29 @@ class ConvForm extends Component {
         super(props);
         this.props = props;
         this.state = {
-            // decdata: "decimal",
-            // hexdata: "hexadecimal",
-            // bindata: "binary",
-            // octdata: "octal",
             currConv: [],
         };
     }
 
     handleDecChange = (e) => {
         if (this.decInputCheck(e.target.value)) {
-            // if (e.target.value === "") {
-            //     this.setState({
-            //         decdata: "decimal",
-            //         hexdata: "hexadecimal", //dec2hex(e.target.value),
-            //         bindata: "binary", //dec2bin(e.target.value)
-            //         octdata: "octal",
-            //     });
-            // } else {
             this.setState({
                 decdata: e.target.value,
                 hexdata: this.state.currConv[0](e.target.value), //dec2hex(e.target.value),
                 bindata: this.state.currConv[1](e.target.value), //dec2bin(e.target.value)
                 octdata: this.state.currConv[2](e.target.value), //dec2hex(e.target.value),
             });
-            // }
         }
     };
 
     handleHexChange = (e) => {
         if (this.hexInputCheck(e.target.value)) {
-            // if (e.target.value === "") {
-            //     this.setState({
-            //         decdata: "decimal",
-            //         hexdata: "hexadecimal", //dec2hex(e.target.value),
-            //         bindata: "binary", //dec2bin(e.target.value)
-            //         octdata: "octal",
-            //     });
-            // } else {
             this.setState({
                 decdata: this.state.currConv[0](e.target.value), //dec2hex(e.target.value),
                 hexdata: e.target.value,
                 bindata: this.state.currConv[1](e.target.value), //dec2bin(e.target.value)
                 octdata: this.state.currConv[2](e.target.value), //dec2hex(e.target.value),
             });
-            // }
         } else {
             console.log("nope");
         }
@@ -76,21 +54,12 @@ class ConvForm extends Component {
 
     handleBinChange = (e) => {
         if (this.binaryInputCheck(e.target.value)) {
-            // if (e.target.value === "") {
-            //     this.setState({
-            //         decdata: "decimal",
-            //         hexdata: "hexadecimal", //dec2hex(e.target.value),
-            //         bindata: "binary", //dec2bin(e.target.value),
-            //         octdata: "octal",
-            //     });
-            // } else {
             this.setState({
                 decdata: this.state.currConv[0](e.target.value), //dec2bin(e.target.value)
                 hexdata: this.state.currConv[1](e.target.value), //dec2hex(e.target.value),
                 octdata: this.state.currConv[2](e.target.value), //dec2hex(e.target.value),
                 bindata: e.target.value,
             });
-            // }
         } else {
             console.log("binary decimal only!");
         }
@@ -98,21 +67,12 @@ class ConvForm extends Component {
 
     handleOctalChange = (e) => {
         if (this.octalInputCheck(e.target.value)) {
-            // if (e.target.value === "") {
-            //     this.setState({
-            //         decdata: "decimal",
-            //         hexdata: "hexadecimal", //dec2hex(e.target.value),
-            //         bindata: "binary", //dec2bin(e.target.value),
-            //         octdata: "octal",
-            //     });
-            // } else {
             this.setState({
                 decdata: this.state.currConv[0](e.target.value), //dec2bin(e.target.value)
                 hexdata: this.state.currConv[1](e.target.value), //dec2hex(e.target.value),
                 bindata: this.state.currConv[2](e.target.value),
                 octdata: e.target.value,
             });
-            // }
         } else {
             console.log("octal decimal only!");
         }
@@ -135,11 +95,7 @@ class ConvForm extends Component {
     };
 
     handleBinClick = (e) => {
-        // if (this.state.bindata === "binary") {
-        //     this.setState({ bindata: "", currConv: [bin2dec, bin2hex, bin2oct] });
-        // } else {
         this.setState({ currConv: [bin2dec, bin2hex, bin2oct] });
-        // }
     };
 
     handleOctClick = (e) => {
@@ -147,30 +103,6 @@ class ConvForm extends Component {
             this.setState({ octdata: "", currConv: [oct2dec, oct2hex, oct2bin] });
         } else {
             this.setState({ currConv: [oct2dec, oct2hex, oct2bin] });
-        }
-    };
-
-    focusOutDec = (e) => {
-        if (this.state.decdata === "") {
-            this.setState({ decdata: "decimal" });
-        }
-    };
-
-    focusOutHex = (e) => {
-        if (this.state.hexdata === "") {
-            this.setState({ hexdata: "hexadecimal" });
-        }
-    };
-
-    focusOutBin = (e) => {
-        if (this.state.bindata === "") {
-            this.setState({ bindata: "binary" });
-        }
-    };
-
-    focusOutOct = (e) => {
-        if (this.state.octdata === "") {
-            this.setState({ octdata: "octal" });
         }
     };
 
@@ -189,6 +121,14 @@ class ConvForm extends Component {
     octalInputCheck = (str) => {
         return /^([0-7]*\.)?[0-7]+$/.test(str) || str === "";
     };
+    copyToClipboard = (value) => {
+        const el = document.createElement("textarea");
+        el.value = value;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
+    };
 
     render() {
         return (
@@ -196,102 +136,78 @@ class ConvForm extends Component {
                 <form className="form">
                     <div class="input-container">
                         <p>decimal</p>
-                        {/* <input
-                            type="text"
-                            className="input"
-                            value={this.state.decdata}
-                            onChange={this.handleDecChange}
-                            onClick={this.handleDecClick}
-                            onBlur={this.focusOutDec}
-                        />
-                        // autoFocus */}
+
                         <InputGroup
                             large
-                            onChange={
-                                this.handleDecChange // placeholder="Binary"
-                            }
+                            onChange={this.handleDecChange}
                             onFocus={this.handleDecClick}
-                            value={
-                                this.state.decdata // onBlur={this.focusOutBin}
-                            }
+                            value={this.state.decdata}
                             intent="success"
+                            rightElement={
+                                <Button
+                                    onClick={() =>
+                                        this.copyToClipboard(this.state.decdata)
+                                    }
+                                    icon="clipboard"
+                                />
+                            }
                         />
-                        <CopyButton copyValue={this.state.decdata} btnstyle="primary" />
                     </div>
                     <div class="input-container">
                         <p>hex</p>
-                        {/* <input
-                            type="text"
-                            className="input"
-                            value={
-                                this.state.hexdata // readOnly
-                            }
-                            onChange={this.handleHexChange}
-                            onClick={this.handleHexClick}
-                            onBlur={this.focusOutHex}
-                        /> */}
+
                         <InputGroup
-                            large // placeholder="Binary"
+                            large
                             onChange={this.handleHexChange}
-                            onFocus={this.handleHexClick} // onBlur={this.focusOutBin}
+                            onFocus={this.handleHexClick}
                             value={this.state.hexdata}
                             intent="success"
-                        />
-                        <CopyButton
-                            copyValue={this.state.hexdata}
-                            btnstyle="secondary"
+                            rightElement={
+                                <Button
+                                    onClick={() =>
+                                        this.copyToClipboard(this.state.hexdata)
+                                    }
+                                    icon="clipboard"
+                                />
+                            }
                         />
                     </div>
                     <div class="input-container">
-                        {/* <InputGroup
-                            type="text"
-                            className="input"
-                            // readOnly
-                            value={this.state.bindata}
-                            onChange={this.handleBinChange}
-                            onClick={this.handleBinClick}
-                            onBlur={this.focusOutBin}
-                        /> */}
                         <p>binary</p>
                         <InputGroup
                             large
-                            onChange={
-                                this.handleBinChange // placeholder="Binary"
-                            }
+                            onChange={this.handleBinChange}
                             onFocus={this.handleBinClick}
-                            value={
-                                this.state.bindata // onBlur={this.focusOutBin}
-                            }
+                            value={this.state.bindata}
                             intent="success"
-                        />
-                        <CopyButton
-                            copyValue={this.state.bindata}
-                            btnstyle="tertiary"
+                            rightElement={
+                                <Button
+                                    onClick={() =>
+                                        this.copyToClipboard(this.state.bindata)
+                                    }
+                                    icon="clipboard"
+                                />
+                            }
                         />
                     </div>
                     <div className="input-container">
                         <p>octal</p>
-                        {/* <input
-                            type="text"
-                            className="input"
-                            value={this.state.octdata}
-                            onChange={this.handleOctalChange}
-                            onClick={this.handleOctClick}
-                            onBlur={this.focusOutOct}
-                        /> */}
 
                         <InputGroup
                             large
-                            onChange={
-                                this.handleOctChange // placeholder="Binary"
-                            }
+                            onChange={this.handleOctChange}
                             onFocus={this.handleOctClick}
-                            value={
-                                this.state.octdata // onBlur={this.focusOutBin}
-                            }
+                            value={this.state.octdata}
                             intent="success"
+                            rightElement={
+                                <Button
+                                    onClick={() =>
+                                        this.copyToClipboard(this.state.octdata)
+                                    }
+                                    icon="clipboard"
+                                />
+                            }
                         />
-                        <CopyButton copyValue={this.state.octdata} btnstyle="tetrary" />
                     </div>
                 </form>
             </React.Fragment>

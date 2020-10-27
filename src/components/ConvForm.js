@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import anyBase from "any-base";
-import { Button, InputGroup } from "@blueprintjs/core";
+import { Button, InputGroup, Toaster, Position } from "@blueprintjs/core";
 import "../App.css";
 import "normalize.css/normalize.css";
 import "@blueprintjs/core/lib/css/blueprint.css";
@@ -17,6 +17,12 @@ const bin2oct = anyBase(anyBase.BIN, anyBase.OCT);
 const oct2dec = anyBase(anyBase.OCT, anyBase.DEC);
 const oct2bin = anyBase(anyBase.OCT, anyBase.BIN);
 const oct2hex = anyBase(anyBase.OCT, anyBase.HEX);
+
+// Toast Instance used to show when a message is copied.
+const CopyToaster = Toaster.create({
+    position: Position.BOTTOM,
+    maxToasts: 1
+})
 
 class ConvForm extends Component {
     constructor(props) {
@@ -64,7 +70,7 @@ class ConvForm extends Component {
         }
     };
 
-    handleOctalChange = (e) => {
+    handleOctChange = (e) => {
         if (this.octalInputCheck(e.target.value)) {
             this.setState({
                 decdata: this.state.currConv[0](e.target.value), //dec2bin(e.target.value)
@@ -127,6 +133,7 @@ class ConvForm extends Component {
         el.select();
         document.execCommand("copy");
         document.body.removeChild(el);
+        CopyToaster.show({message: "Copied to Clipboard!"})
     };
 
     render() {
